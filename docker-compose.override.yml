@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  mssql:
+    image: mrbackslash/mssql-bw-tiny
+    container_name: bitwarden-mssql
+    restart: always
+    stop_grace_period: 60s
+    volumes:
+      - ../mssql/data:/var/opt/mssql/data
+      - ../logs/mssql:/var/opt/mssql/log
+      - ../mssql/backups:/etc/bitwarden/mssql/backups
+    env_file:
+      - mssql.env
+      - ../env/uid.env
+      - ../env/mssql.override.env
